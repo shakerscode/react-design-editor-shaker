@@ -3,6 +3,8 @@ import ResizeObserver from "resize-observer-polyfill"
 import useAppContext from "~/hooks/useAppContext"
 import Loading from "./components/Loading"
 import { editorFonts } from "./constants/fonts"
+import { getPublicDesigns } from "./store/slices/designs/actions"
+import { getPublicComponents } from "./store/slices/components/actions"
 import { getFonts } from "./store/slices/fonts/actions"
 import { getPixabayResources } from "./store/slices/resources/actions"
 import { getUploads } from "./store/slices/uploads/actions"
@@ -41,8 +43,11 @@ const Container = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     dispatch(getFonts())
-    dispatch(getUploads())
+    dispatch(getUploads()) 
+    dispatch(getPublicComponents())
     dispatch(getPixabayResources())
+    dispatch(getPublicDesigns())
+    
     loadFonts()
     setTimeout(() => {
       setLoaded(true)
